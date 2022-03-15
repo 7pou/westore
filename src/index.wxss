@@ -1,0 +1,22 @@
+.grid-list {
+  position: relative;
+  height: 100%;
+}
+
+.grid-item,  .grid-start-slot {
+  
+  position: absolute;
+
+}
+
+.grid-item .mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  
+}
+
+.grid-item image {
+  width: 100%;
+  height: 100%;
+}
