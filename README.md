@@ -40,18 +40,6 @@ this.selectComponent('#GridLuckdrawRef').setup({ id })
 
 ## 参数说明
 
-list: {type: Array, value: []},
-    gridItemGap: {type: Number, value: 10, observer() { this.parseGridStyle() }},
-    gridItemWidth: {type: Number, value: 140, observer() { this.parseGridStyle() }},
-    gridItemHeight: {type: Number, value: 130, observer() { this.parseGridStyle() }},
-    animated: {type: Boolean, value: false}, // 加载动画 (暂不支持)
-    speed: {type: Number, value: 100}, // 运行速度(speed 秒/次)
-    minRunCount: {type: Number, value: 30}, // 最小运行次数
-    diminishingCount: {type: Number, value: 25}, // 开始减速的时机 (当运行多少次后开始减速)
-    deceleration: {type: Number, value: 60}, // 每次运行增大间隔时间 (秒/次)
-    uniqueKey: {type: String, value: 'id'}, // 唯一key
-    imageSrcKey: {type: String, value: 'src'} // 奖品图片字段名
-
 | 参数          | 类型           | 是否必填 | 默认值    | 说明                    |
 | ------------  | ------------- | ------ | -------- | ----------------------------  |
 | list          |  array        | 是     | []     | 奖品列表                          |
