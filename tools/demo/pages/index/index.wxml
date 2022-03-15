@@ -1,0 +1,10 @@
+<view class="grid-block">
+  <image class="bg" src="/assets/grid-bg.gif"  />
+  
+  <GridLuckdraw id="GridLuckdrawRef" list="{{ prizeList }}">
+    <button bindtap="handleLottery" class="btn">抽奖</button>
+  </GridLuckdraw>
+</view>
+
+
+<button bindtap="handleNavCustomPage">自定义参数演示</button>

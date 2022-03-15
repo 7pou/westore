@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "基础使用",
+  "usingComponents": {
+    "GridLuckdraw": "../../components/index"
+  }
+}

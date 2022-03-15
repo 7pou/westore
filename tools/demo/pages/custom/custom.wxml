@@ -1,0 +1,75 @@
+<view class="grid-block">
+  <image class="bg" src="/assets/grid-bg.gif"  />
+  
+  <GridLuckdraw 
+    id="GridLuckdrawRef" 
+    list="{{ prizeList }}" 
+    imageSrcKey="{{imageSrcKey}}"
+    gridItemGap="{{gridItemGap}}" 
+    gridItemWidth="{{gridItemWidth}}"
+    gridItemHeight="{{gridItemHeight}}"
+    speed="{{speed}}" 
+    minRunCount="{{minRunCount}}"
+    diminishingCount="{{diminishingCount}}"
+    deceleration="{{deceleration}}"
+    uniqueKey="{{uniqueKey}}"
+    imageSrcKey="{{imageSrcKey }}"
+  >
+    <button bindtap="handleLottery" class="btn">抽奖</button>
+  </GridLuckdraw>
+</view>
+
+
+<view class="form-block">
+  <view class="title">布局相关</view>
+  <view class="section">
+    <view class="label">奖品间隙</view>
+    <view class="value">
+      <slider show-value model:value="{{ gridItemGap }}"/>
+    </view>
+  </view>
+  <view class="section">
+    <view class="label">奖品宽度</view>
+    <view class="value">
+      <slider min="50" max="200" show-value model:value="{{ gridItemWidth }}"/>
+    </view>
+  </view>
+  <view class="section">
+    <view class="label">奖品高度</view>
+    <view class="value">
+      <slider min="50" max="200" show-value model:value="{{ gridItemHeight }}"/>
+    </view>
+  </view>
+
+</view>
+
+<view class="form-block">
+  <view class="title">运行动画相关</view>
+  <view class="section">
+    <view class="label">运行速度(秒/次)</view>
+    <view class="value">
+      <input type="number" model:value="{{ speed }}"/>
+    </view>
+  </view>
+  <view class="section">
+    <view class="label">最小运行次数</view>
+    <view class="value">
+      <input type="number" model:value="{{ minRunCount }}"/>
+    </view>
+  </view>
+  <view class="section">
+    <view class="label">开始减速的时机</view>
+    <view class="value">
+      <input type="number" model:value="{{ diminishingCount }}"/>
+    </view>
+  </view>
+  <view class="section">
+    <view class="label">减速度(秒/次)</view>
+    <view class="value">
+      <input type="number" model:value="{{ deceleration }}"/>
+    </view>
+  </view>
+
+</view>
+
+<button bindtap="handleLottery">执行动画</button>
