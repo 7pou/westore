@@ -18,6 +18,7 @@ npm install --save @7pound/westore
 ```
 
 2. 构建npm
+
 在微信开发工具中 菜单 - 工具 - 构建npm
 
 3. 定义store
@@ -149,7 +150,7 @@ Component({
 ## DEMO示例
 1. 下载仓库
 ```
-git clone https://github.com/7pou/westore
+git clone https://github.com/7pou/westore.git
 ```
 
 
