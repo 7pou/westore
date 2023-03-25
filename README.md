@@ -143,6 +143,28 @@ Component({
 </view>
 ```
 
+## DEMO示例
+1. 下载仓库
+```
+git clone https://github.com/7pou/westore
+```
+
+
+2. 安装依赖
+```
+npm install or yarn
+```
+3. 执行编译
+
+```
+npm run dev or yarn dev
+```
+4. 导入项目
+
+打开微信开发工具，导入项目、目录在 `/miniprogram_dev`
+
+5. 编译
+
 ## API说明
 
 store.data
@@ -176,7 +198,7 @@ store.update()
 
 基于[小程序npm模板](https://github.com/wechat-miniprogram/miniprogram-custom-component.git) 开发
 
-参考[Tencent/westore](https://github.com/Tencent/westore)
+架构实现参考[Tencent/westore](https://github.com/Tencent/westore)
 
 下期计划
 
