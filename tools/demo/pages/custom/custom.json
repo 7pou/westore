@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "详细参数配置",
-  "usingComponents": {
-    "GridLuckdraw": "../../components/index"
-  }
-}
