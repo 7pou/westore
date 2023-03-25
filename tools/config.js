@@ -1,11 +1,4 @@
-/*
- * @Author: zhao - 🍉
- * @Date: 2020-06-16 21:36:10
- * @LastEditTime: 2022-03-16 02:27:37
- * @LastEditors: zhao - 🍉
- * @Description:
- * @FilePath: /miniprogram-grid-luckdraw/tools/config.js
- */
+
 const path = require('path')
 
 const webpack = require('webpack')
@@ -16,11 +9,11 @@ const isWatch = process.argv.indexOf('--watch') >= 0
 const demoSrc = path.resolve(__dirname, './demo')
 const demoDist = path.resolve(__dirname, '../miniprogram_dev')
 const src = path.resolve(__dirname, '../src')
-const dev = path.join(demoDist, 'components')
+const dev = path.join(demoDist, 'utils')
 const dist = path.resolve(__dirname, '../miniprogram_dist')
 
 module.exports = {
-  entry: ['index', 'lib'],
+  entry: ['index'],
 
   isDev,
   isWatch,
