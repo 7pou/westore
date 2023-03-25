@@ -1,0 +1,20 @@
+<view class="container">
+    <view class="page-card">
+      <UserInfo />
+    </view>
+    <view class="p">
+      <text>userStore.name: </text>
+      <text>{{ $user.name }}</text>
+    </view>
+     <view class="p">
+      <text>appStore.SDKVersion: </text>
+      <text>{{ $app.SDKVersion }}</text>
+    </view>
+
+    <button type="primary" bindtap="handleSetName" class="btn">更新name</button>
+    <button type="primary" bindtap="handleSetVersion" class="btn">更新App.Version</button>
+    <button type="primary" bindtap="handleNavHome" class="btn">返回首页</button>
+</view>
+
+
+

@@ -1,0 +1,18 @@
+<view class="contaienr">
+
+  <view class="title">UserInfo组件</view>
+  <view class="p">
+    <text>userStore.name: </text>
+    <text>{{ $user.name }}</text>
+  </view>
+   <view class="p">
+    <text>userStore.score: </text>
+    <text>{{ $user.score }}</text>
+  </view>
+  <view class="p">
+    <text>userStore.say: </text>
+    <text>{{ $user.say }}</text>
+  </view>
+
+  <button class="btn" type="primary" size="mini" bindtap="handleGetScore" >更新score</button>
+</view>
