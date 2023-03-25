@@ -17,8 +17,10 @@
 npm install --save @7pound/westore
 ```
 
+2. 构建npm
+在微信开发工具中 菜单 - 工具 - 构建npm
 
-2. 定义store
+3. 定义store
 
 ``` js
 import WeStore from '@7pound/westore'
@@ -57,7 +59,7 @@ const userStore = new UserStore()
 export default userStore
 ```
 
-3. 使用
+4. 使用
 
 在page中使用
 
