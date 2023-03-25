@@ -1,56 +1,185 @@
 
-# miniprogram-grid-luckdraw
+# westore
 
-# 小程序九宫格抽奖动画组件
+基于发布订阅简单实现的状态管理，支持多模块，计算属性。
 
-* 支持布局调整
-* 带有完整实例代码
-* 调用简单, 与业务解耦(只有一个方法)
+# 小程序状态管理
+
+* API简单
+* 压缩后仅有1kb, 无其它依赖
+* 可按模块划分
 
 ## 使用
 
 1. 安装
 
-```
-npm install --save miniprogram-grid-luckdraw
+``` js
+npm install --save @7pou/westore
 ```
 
 2. 在需要使用 luckdraw 的页面 page.json 中添加 luckdraw 自定义组件配置
 
-```
-{
-  "usingComponents": {
-    "GridLuckdraw": "miniprogram-grid-luckdraw"
+3. 定义store
+
+``` js
+import WeStore from '@7pou/westore'
+
+const fetchUserScore = () => new Promise((resolve) => {
+  setTimeout(() => {
+    const score = Math.floor(Math.random() * 101)
+    resolve({code: 0, message: 'ok', data: {score}})
+  }, 500)
+})
+class UserStore extends WeStore {
+  data = {
+    name: 'xigua',
+    age: 10,
+    score: 0,
+    say() {
+      // the this is UserStore instance
+      return this.data.name + ' say: my score is ' + this.data.score + '!'
+    }
+  }
+
+  getUserScore = async () => {
+    const res = await fetchUserScore()
+    this.data.score = res.data.score
+    this.update()
+  }
+
+  setName = (name) => {
+    this.data.name = name
+    this.update()
   }
 }
+
+const userStore = new UserStore()
+
+export default userStore
 ```
 
-3. 在wxml文件 挂载 luckdraw 组件,并声明id
+4. 在page中使用
 
+``` js
+Page({
+  data: {
+
+  },
+  onLoad() {
+    userStore.bind(this, '$user')
+  },
+  onUnload() {
+    userStore.unBing(this)
+  },
+
+  handleSetName() {
+    const name = userStore.data.name.split('').reverse().join('')
+    userStore.setName(name)
+  },
+  handleNavMine() {
+    wx.navigateTo({url: '/pages/mine/mine'})
+  }
+})
 ```
-<GridLuckdraw id="GridLuckdrawRef" />
+
+``` html
+<view class="container">
+    <!-- <view class="page-card">
+      <UserInfo />
+    </view> -->
+
+
+    <view class="p">
+      <text>userStore.name: </text>
+      <text>{{ $user.name }}</text>
+    </view>
+
+    <button type="primary" bindtap="handleSetName" class="btn">更新name</button>
+    <button type="primary" bindtap="handleNavMine" class="btn">跳转个人中心页</button>
+</view>
 ```
 
-4. 在js文件中调用
+5. 在Component中使用
 
+```js
+Component({
+  lifetimes: {
+    ready() {
+      userStore.bind(this, '$user')
+    },
+    detached() {
+      userStore.unBind(this)
+    }
+  },
+  methods: {
+    handleGetScore() {
+      wx.showLoading({title: '加载中'})
+      userStore.getUserScore().then(() => {
+        wx.hideLoading()
+      }).catch(() => {})
+    }
+  }
+})
 ```
-const id = 1
-this.selectComponent('#GridLuckdrawRef').setup({ id })
+
+```html
+<view class="contaienr">
+
+  <view class="title">UserInfo组件</view>
+  <view class="p">
+    <text>userStore.name: </text>
+    <text>{{ $user.name }}</text>
+  </view>
+   <view class="p">
+    <text>userStore.score: </text>
+    <text>{{ $user.score }}</text>
+  </view>
+  <view class="p">
+    <text>userStore.say: </text>
+    <text>{{ $user.say }}</text>
+  </view>
+
+  <button class="btn" type="primary" size="mini" bindtap="handleGetScore" >更新score</button>
+</view>
 ```
 
-## 参数说明
+## API说明
 
-| 参数          | 类型           | 是否必填 | 默认值    | 说明                    |
-| ------------  | ------------- | ------ | -------- | ----------------------------  |
-| list          |  array        | 是     | []     | 奖品列表                          |
-| uniqueKey     | string        | 否     | 'id'   | 唯一key                           |
-| imageSrcKey   | string        | 否     | 'src'  | 奖品图片字段名                      |
-| gridItemGap   | number        | 否     | 10     | 奖品布局间隙                      |
-| gridItemWidth | number        | 否     | 140    | 奖品宽度                          |
-| gridItemHeight| number        | 否     | 130    | 奖品高度                          |
-| animated      | boolean       | 否     | false  | 加载动画 (暂不支持)                |
-| speed         | number        | 否     | 100    | 运行速度(speed 秒/次)              |
-| minRunCount   | number        | 否     | 30     | 最小运行次数                        |
-| diminishingCount| number      | 否     | 25     | 开始减速的时机 (当运行多少次后开始减速) |
-| deceleration  | string        | 否     | 60     | 每次运行增大间隔时间 (秒/次)          |
-| activeStyle   | string        | 否     | 'background-color: rgba(255, 249, 70, 0.7);border-radius: 20rpx;'  | 抽奖动画选中样式                      |
+store.data
+
+> store中元数据
+
+store.bind(instance, store_name)
+
+> 在页面中加载（onLoad）、组件挂载（lifetimes.ready）中调用。
+
+> 绑定store到 page 或 component 的data 中，data中的键值为store_name
+
+| 参数          | 说明           | 必填     |
+| ------------  | ------------- | ---------------  |
+| instance   |  page实例 or component实例        | 是   |
+| store_name   |  绑定到page实例 or component实例上data的名称        | 是   |
+
+store.unBind(instance)
+
+> 在页面卸载（onUnload）、组件销毁（lifetimes.detached）调用。
+
+> 取消页面或组件中store绑定
+
+| 参数          | 说明           | 必填     |
+| ------------  | ------------- | ---------------  |
+| instance   |  page实例 or component实例        | 是   |
+
+store.update()
+
+> 更新store的值到页面或组件的 data 中（修改store.data 后调用）
+
+基于[小程序npm模板](https://github.com/wechat-miniprogram/miniprogram-custom-component.git) 开发
+
+参考[Tencent/westore](https://github.com/Tencent/westore)
+
+下期计划
+
+* [ ] 加入diff算法，优化update方法中setData一把梭的性能问题
+* [ ] 加入action log
+* [ ] 支持class 和 defineStore() 两种store定义方法
