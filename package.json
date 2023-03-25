@@ -1,13 +1,12 @@
 {
-  "name": "miniprogram-grid-luckdraw",
+  "name": "westore",
   "version": "1.0.0",
-  "description": "miniprogram luckdraw",
+  "description": "miniprogram-westore",
   "keywords": [
-    "miniprogram",
-    "luckdraw",
-    "小程序",
-    "抽奖",
-    "九宫格"
+    "westore",
+    "miniprogram-westore",
+    "miniprogram-ministore",
+    "小程序状态管理"
   ],
   "main": "miniprogram_dist/index.js",
   "scripts": {
@@ -17,7 +16,7 @@
     "dist": "npm run build",
     "clean-dev": "gulp clean --develop",
     "clean": "gulp clean",
-    "test": "jest --bail",
+    
     "test-debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --bail",
     "coverage": "jest ./test/* --coverage --bail",
     "lint": "eslint \"src/**/*.js\" --fix",
@@ -37,7 +36,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wechat-miniprogram/miniprogram-custom-component.git"
+    "url": "https://github.com/7pou/westore.git"
   },
   "author": "赵 🍉",
   "license": "MIT",
