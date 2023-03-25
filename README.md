@@ -14,15 +14,14 @@
 1. 安装
 
 ``` js
-npm install --save @7pou/westore
+npm install --save @7pound/westore
 ```
 
-2. 在需要使用 luckdraw 的页面 page.json 中添加 luckdraw 自定义组件配置
 
-3. 定义store
+2. 定义store
 
 ``` js
-import WeStore from '@7pou/westore'
+import WeStore from '@7pound/westore'
 
 const fetchUserScore = () => new Promise((resolve) => {
   setTimeout(() => {
@@ -58,7 +57,9 @@ const userStore = new UserStore()
 export default userStore
 ```
 
-4. 在page中使用
+3. 使用
+
+在page中使用
 
 ``` js
 Page({
@@ -99,7 +100,7 @@ Page({
 </view>
 ```
 
-5. 在Component中使用
+在Component中使用
 
 ```js
 Component({
