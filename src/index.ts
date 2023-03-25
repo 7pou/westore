@@ -4,6 +4,8 @@ type IInstance = {
 }
 const parseData = (store: WeStore) => {
   const data: AnyObject = {}
+  if (Array.isArray(store.data)) return store.data
+  if (typeof store.data !== 'object') return store.data
   Object.keys(store.data).forEach(key => {
     const v = store.data[key]
     data[key] = typeof v === 'function' ? v.apply(store) : v
