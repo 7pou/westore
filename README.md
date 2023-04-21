@@ -23,6 +23,8 @@ npm install --save @7pound/westore
 
 3. 定义store
 
+  - 通过class WeStore
+
 ``` js
 import WeStore from '@7pound/westore'
 
@@ -56,6 +58,46 @@ class UserStore extends WeStore {
 }
 
 const userStore = new UserStore()
+
+export default userStore
+```
+
+ - 通过defineStore
+  
+``` js
+import { defineStore } from '@7pound/westore'
+
+const fetchUserScore = () => new Promise((resolve) => {
+  setTimeout(() => {
+    const score = Math.floor(Math.random() * 101)
+    resolve({code: 0, message: 'ok', data: {score}})
+  }, 500)
+})
+const userStore = defineStore({
+  state: {
+    name: 'xigua',
+    age: 10,
+    score: 0,
+    
+  },
+  getters: {
+    say(state) {
+      return state.name + ' say: my score is ' + state.score + '!'
+    }
+  },
+  actions: {
+    getUserScore = async () => {
+      const res = await fetchUserScore()
+      this.data.score = res.data.score
+      this.update()
+    }
+  
+    setName = (name) => {
+      this.data.name = name
+      this.update()
+    }
+  }
+}
 
 export default userStore
 ```
