@@ -1,13 +1,5 @@
-/*
- * @Author: zhao - 🍉
- * @Date: 2022-03-16 00:59:39
- * @LastEditTime: 2023-03-25 17:50:26
- * @LastEditors: zhao - 🍉
- * @Description:
- * @FilePath: /westore/tools/demo/pages/mine/mine.js
- */
-const {default: userStore} = require('../../stores/user')
-const {default: appStore} = require('../../stores/app')
+import userStore from '../../stores/user'
+import appStore from '../../stores/app'
 
 Page({
   data: {

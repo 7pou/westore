@@ -1,6 +1,4 @@
-
-
-import WeStore from '../utils/index'
+import WeStore from '@7pound/westore'
 
 const fetchUserScore = () => new Promise((resolve) => {
   setTimeout(() => {
