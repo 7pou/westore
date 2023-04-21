@@ -1,6 +1,5 @@
-
-const {default: userStore} = require('../../stores/user')
-
+import abilityStore from '../../stores/ability'
+import userStore from '../../stores/user'
 
 Page({
   data: {
@@ -8,9 +7,11 @@ Page({
   },
   onLoad() {
     userStore.bind(this, '$user')
+    abilityStore.bind(this, '$ability')
   },
   onUnload() {
     userStore.unBing(this)
+    abilityStore.bind(this)
   },
 
   handleSetName() {

@@ -9,6 +9,11 @@
       <text>{{ $user.name }}</text>
     </view>
 
+    <view class="p">
+      <text>abilityStore.put: </text>
+      <text>{{ $ability.put }}</text>
+    </view>
+
     <button type="primary" bindtap="handleSetName" class="btn">更新name</button>
     <button type="primary" bindtap="handleNavMine" class="btn">跳转个人中心页</button>
 </view>
