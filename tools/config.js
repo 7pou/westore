@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 
 const path = require('path')
 
@@ -9,7 +10,7 @@ const isWatch = process.argv.indexOf('--watch') >= 0
 const demoSrc = path.resolve(__dirname, './demo')
 const demoDist = path.resolve(__dirname, '../miniprogram_dev')
 const src = path.resolve(__dirname, '../src')
-const dev = path.join(demoDist, 'utils')
+const dev = path.join(demoDist, 'miniprogram_npm/@7pound/westore')
 const dist = path.resolve(__dirname, '../miniprogram_dist')
 
 module.exports = {
@@ -84,9 +85,9 @@ module.exports = {
       new webpack.optimize.LimitChunkCountPlugin({maxChunks: 1}),
     ],
     optimization: {
-      minimize: false,
+      minimize: true,
     },
-    devtool: 'source-map', // 生成 js sourcemap
+    // devtool: 'source-map', // 生成 js sourcemap
     performance: {
       hints: 'warning',
       assetFilter: assetFilename => assetFilename.endsWith('.js')
