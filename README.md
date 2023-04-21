@@ -9,21 +9,16 @@
 * 压缩后仅有1kb, 无其它依赖
 * 可按模块划分
 
-## 使用
+## 快速入门
 
-1. 安装
+1.安装`npm install --save @7pound/westore`
 
-``` js
-npm install --save @7pound/westore
-```
+2.构建npm，在微信开发工具中 菜单 - 工具 - 构建npm
 
-2. 构建npm
+3.定义store
 
-在微信开发工具中 菜单 - 工具 - 构建npm
 
-3. 定义store
-
-  - 通过class WeStore
+#### 通过class WeStore
 
 ``` js
 import WeStore from '@7pound/westore'
@@ -62,7 +57,7 @@ const userStore = new UserStore()
 export default userStore
 ```
 
- - 通过defineStore
+#### 通过defineStore
   
 ``` js
 import { defineStore } from '@7pound/westore'
@@ -102,9 +97,9 @@ const userStore = defineStore({
 export default userStore
 ```
 
-4. 使用
+4.使用
 
-在page中使用
+#### 在page中使用
 
 ``` js
 Page({
@@ -134,7 +129,6 @@ Page({
       <UserInfo />
     </view> -->
 
-
     <view class="p">
       <text>userStore.name: </text>
       <text>{{ $user.name }}</text>
@@ -145,7 +139,9 @@ Page({
 </view>
 ```
 
-在Component中使用
+#### 在Component中使用
+
+
 
 ```js
 Component({
@@ -190,57 +186,69 @@ Component({
 ```
 
 ## DEMO示例
-1. 下载仓库
-```
-git clone https://github.com/7pou/westore.git
-```
+
+1.下载仓库
+`git clone https://github.com/7pou/westore.git`
 
 
-2. 安装依赖
-```
-npm install or yarn
-```
-3. 执行编译
+2.安装依赖`npm install` or `yarn`
 
-```
-npm run dev or yarn dev
-```
-4. 导入项目
+
+3.执行编译`npm run dev` or `yarn dev`
+
+
+4.导入项目
 
 打开微信开发工具，导入项目、目录在 `/miniprogram_dev`
 
-5. 编译
+5.编译小程序
 
 ## API说明
 
-store.data
+### store.data
 
-> store中元数据
+store中元数据
 
-store.bind(instance, store_name)
+### store.bind(instance, store_name)
 
-> 在页面中加载（onLoad）、组件挂载（lifetimes.ready）中调用。
+在页面中加载（onLoad）、组件挂载（lifetimes.ready）中调用。
 
-> 绑定store到 page 或 component 的data 中，data中的键值为store_name
+绑定store到 page 或 component 的data 中，data中的键值为store_name
 
 | 参数          | 说明           | 必填     |
 | ------------  | ------------- | ---------------  |
 | instance   |  page实例 or component实例        | 是   |
 | store_name   |  绑定到page实例 or component实例上data的名称        | 是   |
 
-store.unBind(instance)
+### store.unBind(instance)
 
-> 在页面卸载（onUnload）、组件销毁（lifetimes.detached）调用。
+在页面卸载（onUnload）、组件销毁（lifetimes.detached）调用。
 
-> 取消页面或组件中store绑定
+取消页面或组件中store绑定
 
 | 参数          | 说明           | 必填     |
 | ------------  | ------------- | ---------------  |
 | instance   |  page实例 or component实例        | 是   |
 
-store.update()
+### store.update()
 
-> 更新store的值到页面或组件的 data 中（修改store.data 后调用）
+更新store的值到页面或组件的 data 中（修改store.data 后调用）
+
+### store.on(func)
+
+设置当前store中data发生变化的监听函数
+
+| 参数    | 说明              | 必填    |
+| ------ | ----------------  | ------ |
+| func   |  data改变的监听函数 | 是      |
+
+### store.off(func)
+
+取消设置当前store中data发生变化的监听函数
+
+| 参数    | 说明              | 必填    |
+| ------ | ----------------  | ------ |
+| func   |  data改变的监听函数 | 是      |
 
 基于[小程序npm模板](https://github.com/wechat-miniprogram/miniprogram-custom-component.git) 开发
 
