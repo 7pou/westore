@@ -81,13 +81,13 @@ const userStore = defineStore({
     }
   },
   actions: {
-    getUserScore = async () => {
+    getUserScore: async () => {
       const res = await fetchUserScore()
       this.data.score = res.data.score
       this.update()
     }
   
-    setName = (name) => {
+    setName: (name) => {
       this.data.name = name
       this.update()
     }
