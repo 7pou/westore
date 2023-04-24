@@ -18,10 +18,13 @@ class WeStore {
 
   pages: Map<IInstance, string>
 
+  logger?: null | ((data: AnyObject) => void)
+
   listeners: Array<(data)=>void>
 
   constructor() {
     this.data = {}
+    this.logger = null
     this.pages = new Map()
     this.listeners = []
   }
@@ -58,6 +61,9 @@ class WeStore {
     this.listeners.forEach(fn => {
       if (typeof fn === 'function') fn(data)
     })
+    if (typeof this.logger === 'function') {
+      this.logger(data)
+    }
   }
 }
 
@@ -65,6 +71,7 @@ class WeStore {
 const defineStore = (options) => {
   const store = new WeStore()
   store.data = options.state || options.data || {}
+  store.logger = options.logger
   Object.keys(options.getters).forEach(key => {
     store.data[key] = options.getters[key]
   })
