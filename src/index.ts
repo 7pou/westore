@@ -58,7 +58,7 @@ class WeStore {
     this.pages.forEach((value, instance) => {
       instance.setData({[value]: data})
     })
-    this.listeners.forEach(fn => {
+    this.listeners.slice().forEach(fn => {
       if (typeof fn === 'function') fn(data)
     })
     if (typeof this.logger === 'function') {
@@ -72,10 +72,10 @@ const defineStore = (options) => {
   const store = new WeStore()
   store.data = options.state || options.data || {}
   store.logger = options.logger
-  Object.keys(options.getters).forEach(key => {
+  Object.keys(options.getters || {}).forEach(key => {
     store.data[key] = options.getters[key]
   })
-  Object.keys(options.actions).forEach(key => {
+  Object.keys(options.actions || {}).forEach(key => {
     store[key] = options.actions[key]
   })
   return store
