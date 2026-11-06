@@ -15,6 +15,11 @@
     </view>
 
     <button type="primary" bindtap="handleSetName" class="btn">更新name</button>
+    <view class="p">
+      <text>能力等级：{{ $ability.kun.level }}，watch：{{ observedLevel }}</text>
+    </view>
+    <button type="primary" bindtap="handleLevelUp" class="btn">批量升级（patch + batch）</button>
+    <button bindtap="handleResetAbility" class="btn">重置能力（reset）</button>
     <button type="primary" bindtap="handleNavMine" class="btn">跳转个人中心页</button>
 </view>
 

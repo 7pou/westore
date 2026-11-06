@@ -41,42 +41,49 @@ function wxss(wxssFileList) {
  * 获取 js 流
  */
 function js(jsFileMap, scope) {
-  const webpackConfig = config.webpack
-  const webpackCallback = (err, stats) => {
-    if (!err) {
-      // eslint-disable-next-line no-console
-      console.log(stats.toString({
-        assets: true,
-        cached: false,
-        colors: true,
-        children: false,
-        errors: true,
-        warnings: true,
-        version: true,
-        modules: false,
-        publicPath: true,
-      }))
-    } else {
-      // eslint-disable-next-line no-console
-      console.log(err)
+  return new Promise((resolve, reject) => {
+    const webpackConfig = config.webpack
+    let firstCompilation = true
+    const webpackCallback = (err, stats) => {
+      if (!err) {
+        console.log(stats.toString({
+          assets: true,
+          cached: false,
+          colors: true,
+          children: false,
+          errors: true,
+          warnings: true,
+          version: true,
+          modules: false,
+          publicPath: true,
+        }))
+      } else {
+        console.log(err)
+      }
+      if (firstCompilation) {
+        firstCompilation = false
+        if (err) reject(err)
+        else if (stats.hasErrors()) reject(new Error(stats.toString({all: false, errors: true})))
+        else resolve()
+      }
     }
-  }
 
-  webpackConfig.entry = jsFileMap
-  webpackConfig.output.path = distPath
+    webpackConfig.entry = jsFileMap
+    webpackConfig.output.path = distPath
 
-  if (scope.webpackWatcher) {
-    scope.webpackWatcher.close()
-    scope.webpackWatcher = null
-  }
+    if (scope.webpackWatcher) {
+      scope.webpackWatcher.close()
+      scope.webpackWatcher = null
+    }
 
-  if (config.isWatch) {
-    scope.webpackWatcher = webpack(webpackConfig).watch({
-      ignored: /node_modules/,
-    }, webpackCallback)
-  } else {
-    webpack(webpackConfig).run(webpackCallback)
-  }
+    if (config.isWatch) {
+      scope.webpackWatcher = webpack(webpackConfig).watch({
+        ignored: /node_modules/,
+      }, webpackCallback)
+    } else {
+      webpack(webpackConfig).run(webpackCallback)
+    }
+  })
 }
 
 /**
@@ -221,7 +228,7 @@ class BuildTask {
         jsFileList.length &&
         !_.compareArray(this.cachedComponentListMap.jsFileList, jsFileList)) {
         if (jsConfig.webpack) {
-          js(this.componentListMap.jsFileMap, this)
+          return js(this.componentListMap.jsFileMap, this)
         } else {
           return copy(jsFileList)
         }

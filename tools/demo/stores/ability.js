@@ -1,5 +1,4 @@
 import {defineStore} from '@7pound/westore'
-// 使用 defineStore定义store
 const abilityStore = defineStore({
   state: {
     kun: {
@@ -8,7 +7,8 @@ const abilityStore = defineStore({
     },
     sing: 'sing',
     jump: 'jump',
-    rap: 'rap'
+    rap: 'rap',
+    privateNote: 'not bound to the page'
   },
   getters: {
     put(state) {
@@ -20,6 +20,13 @@ const abilityStore = defineStore({
       setTimeout(() => {
         this.data.kun = {level: 2, use: 'used'}
         this.update()
+      })
+    },
+    levelUp() {
+      this.batch(() => {
+        this.patch({sing: 'sing+'})
+        this.data.kun.level++
+        this.data.kun.use = 'used'
       })
     }
   }

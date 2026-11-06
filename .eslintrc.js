@@ -4,7 +4,6 @@ module.exports = {
     'plugin:promise/recommended'
   ],
   'parser': '@typescript-eslint/parser',
-  'plugins': ['@typescript-eslint'],
   'parserOptions': {
     'ecmaVersion': 9,
     'ecmaFeatures': {
@@ -18,10 +17,22 @@ module.exports = {
     'jest': true
   },
   'plugins': [
+    '@typescript-eslint',
     'import',
     'node',
     'promise'
   ],
+  'settings': {
+    'import/resolver': {node: {extensions: ['.js', '.json', '.ts']}}
+  },
+  'overrides': [{
+    files: ['*.ts'],
+    rules: {
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': ['error', {args: 'none'}],
+      'import/extensions': ['error', 'ignorePackages', {ts: 'never'}]
+    }
+  }],
   'rules': {
     'arrow-parens': 'off',
     'comma-dangle': [

@@ -3,6 +3,7 @@
 const path = require('path')
 
 const webpack = require('webpack')
+const TerserPlugin = require('terser-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
 
 const isDev = process.argv.indexOf('--develop') >= 0
@@ -14,7 +15,7 @@ const dev = path.join(demoDist, 'miniprogram_npm/@7pound/westore')
 const dist = path.resolve(__dirname, '../miniprogram_dist')
 
 module.exports = {
-  entry: ['index'],
+  entry: ['index', 'persistence'],
 
   isDev,
   isWatch,
@@ -49,7 +50,7 @@ module.exports = {
         }, {
           loader: 'babel-loader',
           options: {
-            cacheDirectory: true,
+            cacheDirectory: false,
           },
         }, {
           loader: 'eslint-loader',
@@ -63,7 +64,7 @@ module.exports = {
         }, {
           loader: 'babel-loader',
           options: {
-            cacheDirectory: true,
+            cacheDirectory: false,
           },
         }, {
           loader: 'ts-loader',
@@ -78,7 +79,7 @@ module.exports = {
     },
     resolve: {
       modules: [src, 'node_modules'],
-      extensions: ['.js', '.json'],
+      extensions: ['.ts', '.js', '.json'],
     },
     plugins: [
       new webpack.DefinePlugin({}),
@@ -86,6 +87,7 @@ module.exports = {
     ],
     optimization: {
       minimize: true,
+      minimizer: [new TerserPlugin({cache: false})],
     },
     // devtool: 'source-map', // 生成 js sourcemap
     performance: {
@@ -94,5 +96,5 @@ module.exports = {
     }
   },
 
-  copy: ['./assets', './utils.js'], // 将会复制到目标目录
+  copy: [],
 }
